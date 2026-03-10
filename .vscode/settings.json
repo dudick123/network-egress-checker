@@ -1,0 +1,14 @@
+{
+  "python.defaultInterpreterPath": ".venv/bin/python",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "mypy-type-checker.args": ["--strict"],
+  "ruff.lint.args": ["--config=pyproject.toml"],
+  "python.testing.pytestEnabled": true,
+  "python.testing.pytestArgs": ["tests"]
+}

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: egress-checker-config
+data:
+  config.yaml: |
+    targets:
+      - name: partner-api
+        url: https://api.example.com/health
+      - name: internal-auth
+        url: https://auth-service.platform.svc.cluster.local/healthz
+      - name: database
+        host: sql-server.private.network
+        port: 1433
+        protocol: tcp

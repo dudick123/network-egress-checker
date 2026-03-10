@@ -1,0 +1,39 @@
+{
+  "name": "Network Egress Checker",
+  "image": "mcr.microsoft.com/devcontainers/python:3.14",
+  "features": {
+    "ghcr.io/devcontainers-extra/features/uv:1": {},
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "helm": "none",
+      "minikube": "none"
+    }
+  },
+  "postCreateCommand": "uv sync && curl -s https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh | bash && sudo mv kustomize /usr/local/bin/",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.mypy-type-checker",
+        "charliermarsh.ruff",
+        "ms-vscode-remote.remote-containers"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": ".venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.formatOnSave": true,
+          "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+          }
+        },
+        "mypy-type-checker.args": ["--strict"],
+        "ruff.lint.args": ["--config=pyproject.toml"]
+      }
+    }
+  },
+  "mounts": [
+    "source=egress-checker-uv-cache,target=/root/.cache/uv,type=volume",
+    "source=egress-checker-mypy-cache,target=/workspaces/network-egress-checker/.mypy_cache,type=volume"
+  ],
+  "forwardPorts": [8080, 9090]
+}
